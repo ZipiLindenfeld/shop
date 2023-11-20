@@ -4,7 +4,7 @@
 - עובד
 - ספק
 - מוצר
-## לעובד ROUTES  מיפוי
+## מיפוי ROUTES  לעובד
  - שליפת רשימת עובדים 
 GET https://localhost:7211/api/Employee
 - שליפת עובד לפי מזהה
@@ -15,7 +15,7 @@ POST  https://localhost:7211/api/Employee
 PUT https://localhost:7211/api/Employee/1
 - מחיקת עובד
 DELETE https://localhost:7211/api/Employee/1
-##  ספק ROUTES  מיפוי
+##  מיפוי ROUTES  ספק
  - שליפת רשימת ספקים
 GET https://localhost:7211/api/Provider
 - שליפת ספק לפי מזהה
@@ -26,7 +26,7 @@ POST  https://localhost:7211/api/Provider
 PUT  https://localhost:7211/api/Provider/1
 - מחיקת ספק
 DELETE   https://localhost:7211/api/Provider/1
-##   מוצר ROUTES  מיפוי
+##   מיפוי ROUTES  מוצר
  - שליפת רשימת מוצרים
 GET https://localhost:7211/api/Product
 - שליפת מוצר  לפי מחיר
@@ -35,5 +35,7 @@ GET https://localhost:7211/api/Product
 POST  https://localhost:7211/api/Product
 - עדכון מוצר
 PUT https://localhost:7211/api/Product/1
-- מחיקת מוצר
+- עדכון מחיר מוצר 
+PUT https://localhost:7211/api/Product/1/12
+-  מחיקת מוצר
 DELETE   https://localhost:7211/api/Product/1
