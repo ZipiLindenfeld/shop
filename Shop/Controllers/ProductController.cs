@@ -18,10 +18,10 @@ namespace Shop.Controllers
         }
 
         // GET api/<EmployeeController>/5
-        [HttpGet("{id}")]
-        public ActionResult<Product> Get(int id)
+        [HttpGet("{price}")]
+        public ActionResult<Product> Get(int price)
         {
-            var product = products.Find(e => e.Id == id);
+            var product = products.Find(e => e.Price == price);
             if (product == null)
                 return NotFound();
             return Ok(product);
@@ -42,6 +42,17 @@ namespace Shop.Controllers
             if (product2 == null)
                 return NotFound();
             products.Remove(products.Find(e => e.Id == id));
+            products.Add(product);
+            return Ok();
+        }
+        // PUT api/<EmployeeController>/5
+        [HttpPut("{id}/{price}")]
+        public ActionResult Put(int id,int price, [FromBody] Product product)
+        {
+            var product2 = products.Find(e => e.Id == id);
+            if (product2 == null)
+                return NotFound();
+            products.Find(e => e.Id == id).Price=price;
             products.Add(product);
             return Ok();
         }
