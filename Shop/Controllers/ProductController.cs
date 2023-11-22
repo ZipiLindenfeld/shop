@@ -46,14 +46,13 @@ namespace Shop.Controllers
             return Ok();
         }
         // PUT api/<EmployeeController>/5
-        [HttpPut("{id}/{price}")]
-        public ActionResult Put(int id,int price, [FromBody] Product product)
+        [HttpPut("{id}/price")]
+        public ActionResult Put(int id, [FromBody] int price)
         {
             var product2 = products.Find(e => e.Id == id);
             if (product2 == null)
                 return NotFound();
             products.Find(e => e.Id == id).Price=price;
-            products.Add(product);
             return Ok();
         }
 
