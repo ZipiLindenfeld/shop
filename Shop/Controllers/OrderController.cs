@@ -5,24 +5,24 @@ using Shop.Entities;
 
 namespace Shop.Controllers
 {
-    
+
     [Route("api/[controller]")]
     [ApiController]
     public class OrderController : ControllerBase
     {
-        readonly static List<Order> orders=new List<Order>();
+        private DataContext context;
         // GET: api/<OrderController>
         [HttpGet]
         public List<Order> Get()
         {
-            return orders;
+            return context.Orders;
         }
 
         // GET api/<OrderController>/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var order = orders.Find(o => o.Id == id);
+            var order = context.Orders.Find(o => o.Id == id);
             if (order == null)
                 return NotFound();
             return Ok(order);
@@ -32,18 +32,18 @@ namespace Shop.Controllers
         [HttpPost]
         public void Post([FromBody] Order order)
         {
-            orders.Add(order);
+            context.Orders.Add(order);
         }
 
         // PUT api/<OrderController>/5
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] Order order)
         {
-            var order2 = orders.Find(o => o.Id == id);
+            var order2 = context.Orders.Find(o => o.Id == id);
             if (order2 == null)
                 return NotFound();
-            orders.Remove(orders.Find(o => o.Id == id));
-            orders.Add(order);
+            context.Orders.Remove(context.Orders.Find(o => o.Id == id));
+            context.Orders.Add(order);
             return Ok();
         }
 
@@ -51,10 +51,10 @@ namespace Shop.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var employee = orders.Find(e => e.Id == id);
+            var employee = context.Orders.Find(e => e.Id == id);
             if (employee == null)
                 return NotFound();
-            orders.Remove(employee);
+            context.Orders.Remove(employee);
             return Ok();
         }
     }

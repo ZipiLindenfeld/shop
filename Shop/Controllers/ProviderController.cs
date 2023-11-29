@@ -9,19 +9,19 @@ namespace Shop.Controllers
     [ApiController]
     public class ProviderController : ControllerBase
     {
-        readonly static List<Provider> providers = new List<Provider>();
+        DataContext context;
         // GET: api/<EmployeeController>
         [HttpGet]
         public List<Provider> Get()
         {
-            return providers;
+            return context.Providers;
         }
 
         // GET api/<EmployeeController>/5
         [HttpGet("{id}")]
-        public ActionResult<Provider> Get(int id)
+        public IActionResult Get(int id)
         {
-            var provider = providers.Find(e => e.Id == id);
+            var provider = context.Providers.Find(e => e.Id == id);
             if (provider == null)
                 return NotFound();
             return Ok(provider);
@@ -31,29 +31,29 @@ namespace Shop.Controllers
         [HttpPost]
         public void Post([FromBody] Provider provider)
         {
-            providers.Add(provider);
+            context.Providers.Add(provider);
         }
 
         // PUT api/<EmployeeController>/5
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] Provider provider)
+        public IActionResult Put(int id, [FromBody] Provider provider)
         {
-            var provider2 = providers.Find(e => e.Id == id);
+            var provider2 = context.Providers.Find(e => e.Id == id);
             if (provider2 == null)
                 return NotFound();
-            providers.Remove(providers.Find(e => e.Id == id));
-            providers.Add(provider);
+            context.Providers.Remove(context.Providers.Find(e => e.Id == id));
+            context.Providers.Add(provider);
             return Ok();
         }
 
         // DELETE api/<EmployeeController>/5
         [HttpDelete("{id}")]
-        public ActionResult<Provider> Delete(int id)
+        public IActionResult Delete(int id)
         {
-            var provider = providers.Find(e => e.Id == id);
+            var provider = context.Providers.Find(e => e.Id == id);
             if(provider == null)
                 return NotFound();
-            providers.Remove(provider);
+            context.Providers.Remove(provider);
             return Ok();
         }
     }

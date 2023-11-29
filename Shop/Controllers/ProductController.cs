@@ -9,19 +9,19 @@ namespace Shop.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        readonly static List<Product> products = new List<Product>();
+        private DataContext context;
         // GET: api/<EmployeeController>
         [HttpGet]
         public List<Product> Get()
         {
-            return products;
+            return context.Products;
         }
 
         // GET api/<EmployeeController>/5
         [HttpGet("{price}")]
-        public ActionResult<Product> Get(int price)
+        public IActionResult Get(int price)
         {
-            var product = products.Find(e => e.Price == price);
+            var product = context.Products.Find(e => e.Price == price);
             if (product == null)
                 return NotFound();
             return Ok(product);
@@ -31,39 +31,39 @@ namespace Shop.Controllers
         [HttpPost]
         public void Post([FromBody] Product product)
         {
-            products.Add(product);
+            context.Products.Add(product);
         }
 
         // PUT api/<EmployeeController>/5
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] Product product)
+        public IActionResult Put(int id, [FromBody] Product product)
         {
-            var product2 = products.Find(e => e.Id == id);
+            var product2 = context.Products.Find(e => e.Id == id);
             if (product2 == null)
                 return NotFound();
-            products.Remove(products.Find(e => e.Id == id));
-            products.Add(product);
+            context.Products.Remove(context.Products.Find(e => e.Id == id));
+            context.Products.Add(product);
             return Ok();
         }
         // PUT api/<EmployeeController>/5
         [HttpPut("{id}/price")]
-        public ActionResult Put(int id, [FromBody] int price)
+        public IActionResult Put(int id, [FromBody] int price)
         {
-            var product2 = products.Find(e => e.Id == id);
+            var product2 = context.Products.Find(e => e.Id == id);
             if (product2 == null)
                 return NotFound();
-            products.Find(e => e.Id == id).Price=price;
+            context.Products.Find(e => e.Id == id).Price=price;
             return Ok();
         }
 
         // DELETE api/<EmployeeController>/5
         [HttpDelete("{id}")]
-        public ActionResult<Product> Delete(int id)
+        public IActionResult Delete(int id)
         {
-            var product = products.Find(e => e.Id == id);
+            var product = context.Products.Find(e => e.Id == id);
             if (product == null)
                 return NotFound();
-            products.Remove(product);
+            context.Products.Remove(product);
             return Ok();
         }
     }
